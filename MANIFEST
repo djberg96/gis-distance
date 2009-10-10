@@ -1,0 +1,7 @@
+* CHANGES
+* MANIFEST
+* README
+* Rakefile
+* gis-distance.gemspec
+* lib/gis/distance.rb
+* test/test_gis_distance.rb
