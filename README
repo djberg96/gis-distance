@@ -11,8 +11,7 @@ require 'gis/distance'
 # New York to Los Angeles
 gis = GIS::Distance.new(40.47, 73.58, 34.3, 118.15)
 
-p gis.distance    # Kilometers, default
-p gis.distance.km # Kilometers
+p gis.distance    # Kilometers
 p gis.distance.mi # Miles 
 
 == License

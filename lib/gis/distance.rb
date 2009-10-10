@@ -6,7 +6,7 @@ module GIS
       class Error < StandardError; end
 
       # The version of the gis-distance library
-      VERSION = '0.1.0'
+      VERSION = '1.0.0'
 
       # Create a new GIS::Distance object using the two sets of coordinates
       # that are provided.
@@ -21,8 +21,9 @@ module GIS
          @latitude2  = latitude2
          @longitude2 = longitude2
 
-         @radius  = 6367.45
-         @formula = 'haversine'
+         @radius   = 6367.45
+         @formula  = 'haversine'
+         @distance = nil
       end
 
       # Returns the radius of the Earth in kilometers. The default is 6367.45.
@@ -75,6 +76,7 @@ module GIS
       # provided in the constructor.
       #
       def distance
+         @distance =
          case @formula.to_s.downcase
             when 'haversine'
                haversine_formula
@@ -118,5 +120,16 @@ module GIS
 
          @radius * c
       end
+
+      # Add a custom method to the base Float class if it isn't already defined.
+      class ::Float
+         unless self.respond_to?(:mi)
+            # Convert miles to kilometers.
+            def mi
+               self * 0.621371192
+            end
+         end
+      end
    end
 end
+
