@@ -10,6 +10,7 @@ Gem::Specification.new do |gem|
    gem.files       = Dir['**/*'].reject{ |f| f.include?('CVS') }
    gem.test_files  = ['test/test_gis_distance.rb']
    gem.has_rdoc    = true
+   gem.homepage    = 'http://github.com/djberg96/gis-distance'
 
    gem.extra_rdoc_files  = ['README', 'CHANGES', 'MANIFEST']
 
