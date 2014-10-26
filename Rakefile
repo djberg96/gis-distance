@@ -1,27 +1,32 @@
 require 'rake'
+require 'rake/clean'
 require 'rake/testtask'
-include Config
+require 'rbconfig'
+include RbConfig
 
-desc "Install the gis-distance library"
-task :install_lib do
-   dest = File.join(CONFIG['sitelibdir'], 'gis')
-   Dir.mkdir(dest) unless File.exists? dest
-   cp 'lib/gis/distance.rb', dest, :verbose => true
-end
+CLEAN.include('**/*.gem', '**/*.log')
 
-desc 'Build the gis-distance gem'
-task :gem do
-   spec = eval(IO.read('gis-distance.gemspec'))
-   Gem::Builder.new(spec).build
-end
+namespace 'gem' do
+  desc 'Create the gis-distance gem'
+  task :create => [:clean] do
+    spec = eval(IO.read('gis-distance.gemspec'))
 
-desc 'Install the gis-distance library as a gem'
-task :install_gem => [:gem] do
-   file = Dir["*.gem"].first
-   sh "gem install #{file}"
+    if Gem::VERSION < "2.0"
+      Gem::Builder.new(spec).build
+    else
+      require 'rubygems/package'
+      Gem::Package.build(spec)
+    end
+  end
+
+  desc 'Install the gis-distance gem'
+  task :install => [:create] do
+    file = Dir["*.gem"].first
+    sh "gem install -l #{file}"
+  end
 end
 
 Rake::TestTask.new do |t|
-   t.warning = true
-   t.verbose = true
+  t.warning = true
+  t.verbose = true
 end
