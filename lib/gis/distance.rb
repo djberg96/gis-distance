@@ -6,7 +6,7 @@ module GIS
       class Error < StandardError; end
 
       # The version of the gis-distance library
-      VERSION = '1.0.0'
+      VERSION = '1.0.1'
 
       # Create a new GIS::Distance object using the two sets of coordinates
       # that are provided.
@@ -45,7 +45,7 @@ module GIS
       #
       def radius=(kms)
          if kms < 6357.0 || kms > 6378.0
-            raise Error, "Proposed radius '#{kms}' is out of range" 
+            raise Error, "Proposed radius '#{kms}' is out of range"
          end
          @radius = kms
       end
