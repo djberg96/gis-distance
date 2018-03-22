@@ -1,19 +1,29 @@
 require 'rubygems'
 
-Gem::Specification.new do |gem|
-  gem.name        = 'gis-distance'
-  gem.version     = '1.0.1' 
-  gem.authors     = ['Daniel J. Berger', 'Ardith Falkner']
-  gem.license     = 'Artistic 2.0'
-  gem.description = 'Calculate the distance between 2 points on Earth'
-  gem.email       = 'djberg96@gmail.com'
-  gem.files       = Dir['**/*'].reject{ |f| f.include?('git') }
-  gem.test_files  = ['test/test_gis_distance.rb']
-  gem.homepage    = 'http://github.com/djberg96/gis-distance'
+Gem::Specification.new do |spec|
+  spec.name        = 'gis-distance'
+  spec.version     = '1.0.2'
+  spec.authors     = ['Daniel J. Berger', 'Ardith Falkner']
+  spec.license     = 'Artistic 2.0'
+  spec.description = 'Calculate the distance between two points on Earth'
+  spec.email       = 'djberg96@gmail.com'
+  spec.files       = Dir['**/*'].reject{ |f| f.include?('git') }
+  spec.test_files  = ['test/test_gis_distance.rb']
+  spec.homepage    = 'http://github.com/djberg96/gis-distance'
+  spec.cert_chain  = ['certs/djberg96_pub.pem']
 
-  gem.extra_rdoc_files  = ['README', 'CHANGES', 'MANIFEST']
+  spec.extra_rdoc_files  = ['README', 'CHANGES', 'MANIFEST']
 
-  gem.summary = <<-EOF
+  spec.metadata = {
+    'homepage_uri'      => 'https://github.com/djberg96/gis-distance',
+    'bug_tracker_uri'   => 'https://github.com/djberg96/gis-distance/issues',
+    'changelog_uri'     => 'https://github.com/djberg96/gis-distance/blob/master/CHANGES',
+    'documentation_uri' => 'https://github.com/djberg96/gis-distance/wiki',
+    'source_code_uri'   => 'https://github.com/djberg96/gis-distance',
+    'wiki_uri'          => 'https://github.com/djberg96/gis-distance/wiki'
+  }
+
+  spec.summary = <<-EOF
     The gis-distance library provides a simple interface for
     calculating the distance between two points on Earth using
     latitude and longitude.
