@@ -1,3 +1,10 @@
+== 1.0.2 - 22-Mar-2018
+* Added 'cosines' as a supported formula. This will use the Law of cosines
+  to calculate the distance.
+* Added metadata to the gemspec.
+* Added a cert.
+* Rakefile now assumes Rubygems 2.x, and other minor updates.
+
 == 1.0.1 - 26-Oct-2014
 * Updated gemspec, Rakefile.
 
