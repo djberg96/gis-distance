@@ -6,7 +6,7 @@ module GIS
     class Error < StandardError; end
 
     # The version of the gis-distance library
-    VERSION = '1.0.1'
+    VERSION = '1.0.2'.freeze
 
     # Create a new GIS::Distance object using the two sets of coordinates
     # that are provided.
