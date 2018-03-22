@@ -7,7 +7,8 @@ class TC_GIS_Distance < Test::Unit::TestCase
   end
 
   def test_version
-    assert_equal('1.0.1', GIS::Distance::VERSION)
+    assert_equal('1.0.2', GIS::Distance::VERSION)
+    assert_true(GIS::Distance::VERSION.frozen?)
   end
 
   def test_distance_basic_functionality
