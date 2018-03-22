@@ -11,6 +11,10 @@ require 'gis/distance'
 # New York to Los Angeles
 gis = GIS::Distance.new(40.47, 73.58, 34.3, 118.15)
 
+# Set the formula of your choice
+gis.formula = 'cosines'
+gis.formula = 'haversine'
+
 p gis.distance    # Kilometers
 p gis.distance.mi # Miles 
 
