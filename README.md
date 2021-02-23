@@ -3,7 +3,7 @@ The gis-distance library allows you to calculate geographic distance between
 two points using the formula of your choice.
 
 ## Installation
-gem install gis-distance
+`gem install gis-distance`
 
 ## Synopsis
 ```ruby
