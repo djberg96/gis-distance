@@ -4,15 +4,13 @@ Gem::Specification.new do |spec|
   spec.name        = 'gis-distance'
   spec.version     = '1.0.2'
   spec.authors     = ['Daniel J. Berger', 'Ardith Falkner']
-  spec.license     = 'Artistic 2.0'
+  spec.license     = 'Artistic-2.0'
   spec.description = 'Calculate the distance between two points on Earth'
   spec.email       = 'djberg96@gmail.com'
   spec.files       = Dir['**/*'].reject{ |f| f.include?('git') }
   spec.test_files  = ['test/test_gis_distance.rb']
   spec.homepage    = 'http://github.com/djberg96/gis-distance'
   spec.cert_chain  = ['certs/djberg96_pub.pem']
-
-  spec.extra_rdoc_files  = ['README', 'CHANGES', 'MANIFEST']
 
   spec.metadata = {
     'homepage_uri'      => 'https://github.com/djberg96/gis-distance',
