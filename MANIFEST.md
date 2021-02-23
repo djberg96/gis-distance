@@ -1,6 +1,6 @@
-* CHANGES
-* MANIFEST
-* README
+* CHANGES.md
+* MANIFEST.md
+* README.md
 * Rakefile
 * gis-distance.gemspec
 * lib/gis-distance.rb
