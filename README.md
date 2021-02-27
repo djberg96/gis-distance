@@ -28,7 +28,7 @@ p gis.distance.mi # Miles
 http://en.wikipedia.org/wiki/Earth_radius
 
 ## License
-Artistic 2.0
+Artistic-2.0
 
 ## Authors
 * Daniel Berger

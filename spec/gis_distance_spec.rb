@@ -5,7 +5,7 @@ RSpec.describe GIS::Distance do
   let(:gis){ GIS::Distance.new(40.47, 73.58, 34.3, 118.15) }
 
   example "version" do
-    expect(GIS::Distance::VERSION).to eq('1.0.2')
+    expect(GIS::Distance::VERSION).to eq('1.1.0')
     expect(GIS::Distance::VERSION).to be_frozen
   end
 
