@@ -8,9 +8,11 @@ Gem::Specification.new do |spec|
   spec.description = 'Calculate the distance between two points on Earth'
   spec.email       = 'djberg96@gmail.com'
   spec.files       = Dir['**/*'].reject{ |f| f.include?('git') }
-  spec.test_files  = ['test/test_gis_distance.rb']
+  spec.test_files  = Dir['spec/*_spec.rb']
   spec.homepage    = 'http://github.com/djberg96/gis-distance'
   spec.cert_chain  = ['certs/djberg96_pub.pem']
+
+  spec.add_development_dependency('rspec', '~> 3.9')
 
   spec.metadata = {
     'homepage_uri'      => 'https://github.com/djberg96/gis-distance',
