@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.homepage    = 'http://github.com/djberg96/gis-distance'
   spec.cert_chain  = ['certs/djberg96_pub.pem']
 
+  spec.add_development_dependency('rake')
   spec.add_development_dependency('rspec', '~> 3.9')
 
   spec.metadata = {
