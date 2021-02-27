@@ -1,6 +1,7 @@
 * CHANGES.md
 * MANIFEST.md
 * README.md
+* Gemfile
 * Rakefile
 * gis-distance.gemspec
 * lib/gis-distance.rb
