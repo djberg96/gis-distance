@@ -1,3 +1,5 @@
+[![Ruby](https://github.com/djberg96/gis-distance/actions/workflows/ruby.yml/badge.svg)](https://github.com/djberg96/gis-distance/actions/workflows/ruby.yml)
+
 ## Description
 The gis-distance library allows you to calculate geographic distance between
 two points using the formula of your choice.
