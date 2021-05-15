@@ -9,7 +9,7 @@ namespace 'gem' do
   desc 'Create the gis-distance gem'
   task :create => [:clean] do
     require 'rubygems/package'
-    spec = eval(IO.read('gis-distance.gemspec'))
+    spec = Gem::Specification.load('gis-distance.gemspec')
     spec.signing_key = File.join(Dir.home, '.ssh', 'gem-private_key.pem')
     Gem::Package.build(spec)
   end
