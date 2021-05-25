@@ -80,12 +80,12 @@ module GIS
     #
     def distance
       @distance =
-      case @formula.to_s.downcase
-        when 'haversine'
-          haversine_formula
-        when 'cosines'
-          law_of_cosines_formula
-      end
+        case @formula.to_s.downcase
+          when 'haversine'
+            haversine_formula
+          when 'cosines'
+            law_of_cosines_formula
+        end
     end
 
     private
@@ -94,19 +94,19 @@ module GIS
     # 90.0 and -90.0 while longitudes must be between 180.0 and -180.0.
     #
     def validate(lat1, lon1, lat2, lon2)
-      [lat1, lat2].each{ |lat|
+      [lat1, lat2].each do |lat|
         if lat > 90 || lat < -90
           msg = "Latitude '#{lat}' is invalid - must be between -90 and 90"
           raise Error, msg
         end
-      }
+      end
 
-      [lon1, lon2].each{ |lon|
+      [lon1, lon2].each do |lon|
         if lon > 180 || lon < -180
           msg = "Longitude '#{lon}' is invalid - must be between -180 and 180"
           raise Error, msg
         end
-      }
+      end
     end
 
     # See https://en.wikipedia.org/wiki/Law_of_cosines
@@ -140,7 +140,7 @@ module GIS
 
     # Add a custom method to the base Float class if it isn't already defined.
     class ::Float
-      unless self.respond_to?(:mi)
+      unless respond_to?(:mi)
         # Convert miles to kilometers.
         def mi
           self * 0.621371192
