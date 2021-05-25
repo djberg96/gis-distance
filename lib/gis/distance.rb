@@ -132,7 +132,7 @@ module GIS
       dlat = lat2 - lat1
       dlon = lon2 - lon1
 
-      a = ((Math.sin(dlat / 2))**2) + (Math.cos(lat1) * Math.cos(lat2) * (Math.sin(dlon / 2))**2)
+      a = (Math.sin(dlat / 2)**2) + (Math.cos(lat1) * Math.cos(lat2) * Math.sin(dlon / 2)**2)
       c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
 
       radius * c
