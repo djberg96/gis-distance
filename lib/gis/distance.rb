@@ -66,12 +66,12 @@ module GIS
     #
     def formula=(formula)
       case formula.to_s.downcase
-      when 'haversine'
-        @formula = 'haversine'
-      when 'cosines'
-        @formula = 'cosines'
-      else
-        raise Error, "Formula '#{formula}' not supported"
+        when 'haversine'
+          @formula = 'haversine'
+        when 'cosines'
+          @formula = 'cosines'
+        else
+          raise Error, "Formula '#{formula}' not supported"
       end
     end
 
@@ -81,10 +81,10 @@ module GIS
     def distance
       @distance =
       case @formula.to_s.downcase
-      when 'haversine'
-        haversine_formula
-      when 'cosines'
-        law_of_cosines_formula
+        when 'haversine'
+          haversine_formula
+        when 'cosines'
+          law_of_cosines_formula
       end
     end
 
