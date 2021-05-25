@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The GIS module serves as a namespace only.
 module GIS
   # The Distance class encapsulates methods related to geographic distance.
@@ -6,7 +8,7 @@ module GIS
     class Error < StandardError; end
 
     # The version of the gis-distance library
-    VERSION = '1.1.0'.freeze
+    VERSION = '1.1.0'
 
     # Create a new GIS::Distance object using the two sets of coordinates
     # that are provided.
