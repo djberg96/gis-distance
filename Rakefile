@@ -3,7 +3,7 @@ require 'rake/clean'
 require 'rbconfig'
 require 'rspec/core/rake_task'
 
-CLEAN.include('**/*.gem', '**/*.log')
+CLEAN.include('**/*.gem', '**/*.log', '**/*.lock')
 
 namespace 'gem' do
   desc 'Create the gis-distance gem'
