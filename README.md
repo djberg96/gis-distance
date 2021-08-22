@@ -7,6 +7,9 @@ two points using the formula of your choice.
 ## Installation
 `gem install gis-distance`
 
+## Adding the trusted cert
+`gem cert --add <(curl -Ls https://raw.githubusercontent.com/djberg96/gis-distance/main/certs/djberg96_pub.pem)`
+
 ## Synopsis
 ```ruby
 require 'gis/distance' # or 'gis-distance'
