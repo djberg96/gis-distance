@@ -41,4 +41,4 @@ Metrics/PerceivedComplexity:
   Enabled: false
 Naming/FileName:
   Exclude:
-    - 'lib/archive-tar-external.rb'
+    - 'lib/gis-distance.rb'
