@@ -30,9 +30,7 @@ module GIS
 
     # Returns the radius of the Earth in kilometers. The default is 6367.45.
     #
-    def radius
-      @radius
-    end
+    attr_reader :radius
 
     # Sets the radius of the Earth in kilometers. This is variable because
     # the Earth is not perfectly spherical, and you may wish to adjust it.
@@ -46,9 +44,7 @@ module GIS
     # See http://en.wikipedia.org/wiki/Earth_radius for more information.
     #
     def radius=(kms)
-      if kms < 6357.0 || kms > 6378.0
-        raise Error, "Proposed radius '#{kms}' is out of range"
-      end
+      raise Error, "Proposed radius '#{kms}' is out of range" if kms < 6357.0 || kms > 6378.0
       @radius = kms
     end
 
@@ -56,9 +52,7 @@ module GIS
     # is 'haversine'.
     #--
     # See http://en.wikipedia.org/wiki/Haversine_formula for details.
-    def formula
-      @formula
-    end
+    attr_reader :formula
 
     # Sets the formula to be used internally for calculating the distance.
     # The default is 'haversine'. Your other option is 'cosines' (i.e. the
@@ -118,9 +112,9 @@ module GIS
       sin2 = Math.sin(@latitude2 * Math::PI / 180)
       cos1 = Math.cos(@latitude1 * Math::PI / 180)
       cos2 = Math.cos(@latitude2 * Math::PI / 180)
-      cos3 = Math.cos(@longitude2 * Math::PI / 180 - @longitude1 * Math::PI / 180)
+      cos3 = Math.cos((@longitude2 * Math::PI / 180) - (@longitude1 * Math::PI / 180))
 
-      Math.acos(sin1 * sin2 + cos1 * cos2 * cos3) * radius
+      Math.acos((sin1 * sin2) + (cos1 * cos2 * cos3)) * radius
     end
 
     # See http://en.wikipedia.org/wiki/Haversine_formula
@@ -134,7 +128,7 @@ module GIS
       dlat = lat2 - lat1
       dlon = lon2 - lon1
 
-      a = (Math.sin(dlat / 2)**2) + (Math.cos(lat1) * Math.cos(lat2) * Math.sin(dlon / 2)**2)
+      a = (Math.sin(dlat / 2)**2) + (Math.cos(lat1) * Math.cos(lat2) * (Math.sin(dlon / 2)**2))
       c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
 
       radius * c
