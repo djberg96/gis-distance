@@ -2,7 +2,7 @@ require 'rspec'
 require 'gis/distance'
 
 RSpec.describe GIS::Distance do
-  let(:gis){ GIS::Distance.new(40.47, 73.58, 34.3, 118.15) }
+  let(:gis){ described_class.new(40.47, 73.58, 34.3, 118.15) }
 
   example 'version' do
     expect(GIS::Distance::VERSION).to eq('1.1.0')
@@ -17,19 +17,19 @@ RSpec.describe GIS::Distance do
 
   example 'distance method returns expected result' do
     expect(gis.distance).to be_within(0.01).of(3952.39)
-    expect(GIS::Distance.new(40.47, 73.58, 40.47, 73.58).distance).to eq(0.0)
+    expect(described_class.new(40.47, 73.58, 40.47, 73.58).distance).to eq(0.0)
   end
 
   example 'constructor requires four arguments' do
-    expect{ GIS::Distance.new }.to raise_error(ArgumentError)
-    expect{ GIS::Distance.new(40.47) }.to raise_error(ArgumentError)
-    expect{ GIS::Distance.new(40.47, 73.58) }.to raise_error(ArgumentError)
-    expect{ GIS::Distance.new(40.47, 73.58, 34.3) }.to raise_error(ArgumentError)
+    expect{ described_class.new }.to raise_error(ArgumentError)
+    expect{ described_class.new(40.47) }.to raise_error(ArgumentError)
+    expect{ described_class.new(40.47, 73.58) }.to raise_error(ArgumentError)
+    expect{ described_class.new(40.47, 73.58, 34.3) }.to raise_error(ArgumentError)
   end
 
   example 'latitude and longitude must be within range' do
-    expect{ GIS::Distance.new(91.0, 100.0, 45.0, 45.0) }.to raise_error(GIS::Distance::Error)
-    expect{ GIS::Distance.new(90.0, 190.0, 45.0, 45.0) }.to raise_error(GIS::Distance::Error)
+    expect{ described_class.new(91.0, 100.0, 45.0, 45.0) }.to raise_error(GIS::Distance::Error)
+    expect{ described_class.new(90.0, 190.0, 45.0, 45.0) }.to raise_error(GIS::Distance::Error)
   end
 
   example 'radius basic functionality' do
