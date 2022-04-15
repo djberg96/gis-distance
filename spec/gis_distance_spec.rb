@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rspec'
 require 'gis/distance'
 
@@ -35,7 +37,7 @@ RSpec.describe GIS::Distance do
   example 'radius basic functionality' do
     expect(gis).to respond_to(:radius)
     expect{ gis.radius }.not_to raise_error
-    expect( gis.radius).to be_kind_of(Float)
+    expect(gis.radius).to be_kind_of(Float)
   end
 
   example 'default radius returns expected value' do
@@ -49,7 +51,7 @@ RSpec.describe GIS::Distance do
   example 'radius setter basic functionality' do
     expect(gis).to respond_to(:radius=)
     expect{ gis.radius = 6368.0 }.not_to raise_error
-    expect( gis.radius).to eq(6368.0)
+    expect(gis.radius).to eq(6368.0)
   end
 
   example 'radius value must be within a certain range' do
