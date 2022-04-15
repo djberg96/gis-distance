@@ -11,6 +11,10 @@ RSpec/InstanceVariable:
 
 AllCops:
   NewCops: enable
+  Exclude:
+    - Gemfile
+    - gis-distance.gemspec
+    - Rakefile
 Lint/AssignmentInCondition:
   Enabled: false
 Style/MethodCallWithoutArgsParentheses:
