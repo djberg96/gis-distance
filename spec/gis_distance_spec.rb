@@ -14,7 +14,7 @@ RSpec.describe GIS::Distance do
   example 'distance basic functionality' do
     expect(gis).to respond_to(:distance)
     expect{ gis.distance }.not_to raise_error
-    expect(gis.distance).to be_kind_of(Float)
+    expect(gis.distance).to be_a(Float)
   end
 
   example 'distance method returns expected result' do
@@ -37,7 +37,7 @@ RSpec.describe GIS::Distance do
   example 'radius basic functionality' do
     expect(gis).to respond_to(:radius)
     expect{ gis.radius }.not_to raise_error
-    expect(gis.radius).to be_kind_of(Float)
+    expect(gis.radius).to be_a(Float)
   end
 
   example 'default radius returns expected value' do
@@ -62,7 +62,7 @@ RSpec.describe GIS::Distance do
   example 'formula basic functionality' do
     expect(gis).to respond_to(:formula)
     expect{ gis.formula }.not_to raise_error
-    expect(gis.formula).to be_kind_of(String)
+    expect(gis.formula).to be_a(String)
   end
 
   example 'formula default value' do
@@ -82,7 +82,7 @@ RSpec.describe GIS::Distance do
   example 'mi basic functionality' do
     expect(gis.distance).to respond_to(:mi)
     expect{ gis.distance.mi }.not_to raise_error
-    expect(gis.distance.mi).to be_kind_of(Float)
+    expect(gis.distance.mi).to be_a(Float)
   end
 
   example 'mi behaves as expected' do
