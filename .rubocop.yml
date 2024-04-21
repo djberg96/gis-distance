@@ -8,6 +8,9 @@ RSpec/FilePath:
   SpecSuffixOnly: true
 RSpec/InstanceVariable:
   Enabled: false
+RSpec/SpecFilePathFormat:
+  Exclude:
+    - spec/gis_distance_spec.rb
 
 AllCops:
   NewCops: enable
@@ -34,7 +37,7 @@ Layout/SpaceBeforeBlockBraces:
 Metrics/AbcSize:
   Enabled: false
 Metrics/BlockLength:
-  IgnoredMethods: ['describe', 'context']
+  AllowedMethods: ['describe', 'context']
 Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:
