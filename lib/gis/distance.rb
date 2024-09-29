@@ -66,6 +66,8 @@ module GIS
           @formula = 'haversine'
         when 'cosines'
           @formula = 'cosines'
+        when 'vincenty'
+          @formula = 'vincenty'
         else
           raise Error, "Formula '#{formula}' not supported"
       end
@@ -81,6 +83,8 @@ module GIS
             haversine_formula
           when 'cosines'
             law_of_cosines_formula
+          when 'vincenty'
+            vincenty_formula
         end
     end
 
@@ -132,6 +136,65 @@ module GIS
       c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
 
       radius * c
+    end
+
+    # See https://en.wikipedia.org/wiki/Vincenty's_formulae
+    def vincenty_formula
+      require 'bigdecimal'
+      require 'bigdecimal/util'
+
+      # WGS-84 ellipsiod parameters
+      a = 6378137.0
+      f = 1 / 298.257223563
+      b = (1 - f) * a
+
+      # Convert degrees to radians
+      lat1 = @latitude1.to_d * Math::PI / 180
+      lon1 = @longitude1.to_d * Math::PI / 180
+      lat2 = @latitude2.to_d * Math::PI / 180
+      lon2 = @longitude2.to_d * Math::PI / 180
+
+      # Differences in coordinates
+      big_l = lon2 - lon1
+      u1 = Math.atan((1 - f) * Math.tan(lat1))
+      u2 = Math.atan((1 - f) * Math.tan(lat2))
+
+      sinU1 = Math.sin(u1)
+      cosU1 = Math.cos(u1)
+      sinU2 = Math.sin(u2)
+      cosU2 = Math.cos(u2)
+
+      λ = big_l
+      lambdaP = 2 * Math::PI
+      iterLimit = 100
+
+      while (λ - lambdaP).abs > 1e-12 && iterLimit > 0
+        sinLambda = Math.sin(λ)
+        cosLambda = Math.cos(λ)
+        sinSigma = Math.sqrt((cosU2 * sinLambda) ** 2 + (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) ** 2)
+        cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda
+        sigma = Math.atan2(sinSigma, cosSigma)
+        sinAlpha = cosU1 * cosU2 * sinLambda / sinSigma
+        cos2Alpha = 1 - sinAlpha ** 2
+        cos2SigmaM = cosSigma - 2 * sinU1 * sinU2 / cos2Alpha
+        big_c = f / 16 * cos2Alpha * (4 + f * (4 - 3 * cos2Alpha))
+        lambdaP = λ
+        λ = big_l + (1 - big_c) * f * sinAlpha * (sigma + big_c * sinSigma * (cos2SigmaM + big_c * cosSigma * (-1 + 2 * cos2SigmaM ** 2)))
+        iterLimit -= 1
+      end
+
+      if iterLimit == 0
+        return nil # formula failed to converge
+      end
+
+      u2 = cos2Alpha * (a ** 2 - b ** 2) / (b ** 2)
+      big_a = 1 + u2 / 16384 * (4096 + u2 * (-768 + u2 * (320 - 175 * u2)))
+      big_b = u2 / 1024 * (256 + u2 * (-128 + u2 * (74 - 47 * u2)))
+      deltaSigma = big_b * sinSigma * (cos2SigmaM + big_b / 4 * (cosSigma * (-1 + 2 * cos2SigmaM ** 2) - big_b / 6 * cos2SigmaM * (-3 + 4 * sinSigma ** 2) * (-3 + 4 * cos2SigmaM ** 2)))
+
+      s = b * big_a * (sigma - deltaSigma)
+
+      s.to_f / 1000.0
     end
 
     # Add a custom method to the base Float class if it isn't already defined.

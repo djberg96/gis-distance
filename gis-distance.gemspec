@@ -2,7 +2,7 @@ require 'rubygems'
 
 Gem::Specification.new do |spec|
   spec.name        = 'gis-distance'
-  spec.version     = '1.1.0'
+  spec.version     = '1.2.0'
   spec.authors     = ['Daniel J. Berger', 'Ardith Falkner']
   spec.license     = 'Artistic-2.0'
   spec.description = 'Calculate the distance between two points on Earth'
@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.homepage    = 'http://github.com/djberg96/gis-distance'
   spec.cert_chain  = ['certs/djberg96_pub.pem']
 
+  spec.add_dependency('rvincenty', '~> 0.1.0')
   spec.add_development_dependency('rake')
   spec.add_development_dependency('rspec', '~> 3.9')
   spec.add_development_dependency('rubocop')
