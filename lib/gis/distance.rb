@@ -159,27 +159,27 @@ module GIS
       u1 = Math.atan((1 - f) * Math.tan(lat1))
       u2 = Math.atan((1 - f) * Math.tan(lat2))
 
-      sinU1 = Math.sin(u1)
-      cosU1 = Math.cos(u1)
-      sinU2 = Math.sin(u2)
-      cosU2 = Math.cos(u2)
+      sin_u1 = Math.sin(u1)
+      cos_u1 = Math.cos(u1)
+      sin_u2 = Math.sin(u2)
+      cos_u2 = Math.cos(u2)
 
       λ = big_l
-      lambdaP = 2 * Math::PI
+      lambda_p = 2 * Math::PI
       iterLimit = 100
 
-      while (λ - lambdaP).abs > 1e-12 && iterLimit > 0
-        sinLambda = Math.sin(λ)
-        cosLambda = Math.cos(λ)
-        sinSigma = Math.sqrt((cosU2 * sinLambda) ** 2 + (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) ** 2)
-        cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda
-        sigma = Math.atan2(sinSigma, cosSigma)
-        sinAlpha = cosU1 * cosU2 * sinLambda / sinSigma
-        cos2Alpha = 1 - sinAlpha ** 2
-        cos2SigmaM = cosSigma - 2 * sinU1 * sinU2 / cos2Alpha
-        big_c = f / 16 * cos2Alpha * (4 + f * (4 - 3 * cos2Alpha))
-        lambdaP = λ
-        λ = big_l + (1 - big_c) * f * sinAlpha * (sigma + big_c * sinSigma * (cos2SigmaM + big_c * cosSigma * (-1 + 2 * cos2SigmaM ** 2)))
+      while (λ - lambda_p).abs > 1e-12 && iterLimit > 0
+        sin_lambda = Math.sin(λ)
+        cos_lambda = Math.cos(λ)
+        sin_sigma = Math.sqrt((cos_u2 * sin_lambda) ** 2 + (cos_u1 * sin_u2 - sin_u1 * cos_u2 * cos_lambda) ** 2)
+        cos_sigma = sin_u1 * sin_u2 + cos_u1 * cos_u2 * cos_lambda
+        sigma = Math.atan2(sin_sigma, cos_sigma)
+        sin_alpha = cos_u1 * cos_u2 * sin_lambda / sin_sigma
+        cos2_alpha = 1 - sin_alpha ** 2
+        cos2_sigma_m = cos_sigma - 2 * sin_u1 * sin_u2 / cos2_alpha
+        big_c = f / 16 * cos2_alpha * (4 + f * (4 - 3 * cos2_alpha))
+        lambda_p = λ
+        λ = big_l + (1 - big_c) * f * sin_alpha * (sigma + big_c * sin_sigma * (cos2_sigma_m + big_c * cos_sigma * (-1 + 2 * cos2_sigma_m ** 2)))
         iterLimit -= 1
       end
 
@@ -187,12 +187,12 @@ module GIS
         return nil # formula failed to converge
       end
 
-      u2 = cos2Alpha * (a ** 2 - b ** 2) / (b ** 2)
+      u2 = cos2_alpha * (a ** 2 - b ** 2) / (b ** 2)
       big_a = 1 + u2 / 16384 * (4096 + u2 * (-768 + u2 * (320 - 175 * u2)))
       big_b = u2 / 1024 * (256 + u2 * (-128 + u2 * (74 - 47 * u2)))
-      deltaSigma = big_b * sinSigma * (cos2SigmaM + big_b / 4 * (cosSigma * (-1 + 2 * cos2SigmaM ** 2) - big_b / 6 * cos2SigmaM * (-3 + 4 * sinSigma ** 2) * (-3 + 4 * cos2SigmaM ** 2)))
+      delta_sigma = big_b * sin_sigma * (cos2_sigma_m + big_b / 4 * (cos_sigma * (-1 + 2 * cos2_sigma_m ** 2) - big_b / 6 * cos2_sigma_m * (-3 + 4 * sin_sigma ** 2) * (-3 + 4 * cos2_sigma_m ** 2)))
 
-      s = b * big_a * (sigma - deltaSigma)
+      s = b * big_a * (sigma - delta_sigma)
 
       s.to_f / 1000.0
     end
