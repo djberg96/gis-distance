@@ -32,6 +32,12 @@ p gis.distance.mi # Miles
 ## See Also
 http://en.wikipedia.org/wiki/Earth_radius
 
+## Miscellaneous
+Ruby 2.x was dropped from the test matrix as of version 1.2 because of
+incompatibility with bundler. This library should still work fine with
+older versions of Ruby, but you should strongly consider upgrading at this
+point since Ruby 2.x is now EOL.
+
 ## License
 Artistic-2.0
 
