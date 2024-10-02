@@ -32,6 +32,10 @@ jobs:
         bundler-cache: true
     - name: Run tests
       run: |
-        gem install bundler --no-document
+        if [[ "$(ruby -v | awk '{print $2}')" == 2.7.8* ]]; then
+          gem install bundler -v 2.4.22 --no-document
+        else
+          gem install bundler --no-document
+        fi
         bundle install --quiet
         bundle exec rspec
