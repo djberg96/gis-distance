@@ -1,3 +1,10 @@
+## 1.2.0 - 3-Oct-2024
+* Added support for the vicenty formula, and the rvicenty gem is now a
+  runtime dependency.
+* Dropped Ruby 2.x from the github test matrix. It will still work with
+  older versions of Ruby, however.
+* Some minor updates to the README.md.
+
 ## 1.1.0 - 27-Feb-2021
 * Switched from test-unit to rspec.
 * Added a Gemfile.
