@@ -8,7 +8,7 @@ module GIS
     class Error < StandardError; end
 
     # The version of the gis-distance library
-    VERSION = '1.1.0'
+    VERSION = '1.2.0'
 
     # Create a new GIS::Distance object using the two sets of coordinates
     # that are provided.
@@ -66,6 +66,8 @@ module GIS
           @formula = 'haversine'
         when 'cosines'
           @formula = 'cosines'
+        when 'vincenty'
+          @formula = 'vincenty'
         else
           raise Error, "Formula '#{formula}' not supported"
       end
@@ -81,6 +83,8 @@ module GIS
             haversine_formula
           when 'cosines'
             law_of_cosines_formula
+          when 'vincenty'
+            vincenty_formula
         end
     end
 
@@ -132,6 +136,12 @@ module GIS
       c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
 
       radius * c
+    end
+
+    # See https://en.wikipedia.org/wiki/Vincenty's_formulae
+    def vincenty_formula
+      require 'rvincenty'
+      RVincenty.distance([@latitude1, @longitude1], [@latitude2, @longitude2]) / 1000.0
     end
 
     # Add a custom method to the base Float class if it isn't already defined.

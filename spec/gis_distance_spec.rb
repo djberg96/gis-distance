@@ -7,7 +7,7 @@ RSpec.describe GIS::Distance do
   let(:gis){ described_class.new(40.47, 73.58, 34.3, 118.15) }
 
   example 'version' do
-    expect(GIS::Distance::VERSION).to eq('1.1.0')
+    expect(GIS::Distance::VERSION).to eq('1.2.0')
     expect(GIS::Distance::VERSION).to be_frozen
   end
 
@@ -17,9 +17,37 @@ RSpec.describe GIS::Distance do
     expect(gis.distance).to be_a(Float)
   end
 
-  example 'distance method returns expected result' do
-    expect(gis.distance).to be_within(0.01).of(3952.39)
-    expect(described_class.new(40.47, 73.58, 40.47, 73.58).distance).to eq(0.0)
+  context 'haversine' do
+    before do
+      gis.formula = 'haversine'
+    end
+
+    example 'distance method returns expected result' do
+      expect(gis.distance).to be_within(0.01).of(3952.39)
+      expect(described_class.new(40.47, 73.58, 40.47, 73.58).distance).to eq(0.0)
+    end
+  end
+
+  context 'cosines' do
+    before do
+      gis.formula = 'cosines'
+    end
+
+    example 'distance method returns expected result' do
+      expect(gis.distance).to be_within(0.01).of(3952.39)
+      expect(described_class.new(40.47, 73.58, 40.47, 73.58).distance).to eq(0.0)
+    end
+  end
+
+  context 'vincenty' do
+    before do
+      gis.formula = 'vincenty'
+    end
+
+    example 'distance method returns expected result' do
+      expect(gis.distance).to be_within(0.01).of(3963.40)
+      expect(described_class.new(40.47, 73.58, 40.47, 73.58).distance).to eq(0.0)
+    end
   end
 
   example 'constructor requires four arguments' do
